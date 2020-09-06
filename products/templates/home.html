@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Accueil Pur Beurre{% endblock title %}
+
+{% block nav %}
+
+<nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
+	<div class="container">
+		<a class="navbar-brand js-scroll-trigger" href="{% url "home" %}"><img src="static\icons\logo_pb.png" width="50px" height="50px"> Pur Beurre 
+		{% if user.is_authenticated %}
+  			- Bonjour {{ user.username }}!
+			{% endif %}</a>
+		<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+	</div>
+</div>
+<div class="collapse navbar-collapse" id="navbarResponsive">
+	<ul class="navbar-nav ml-auto my-2 my-lg-0 align-items-center">
+		<form class="form-group w-20" method='get' action="{% url "results" %}">
+					<div class="input-group-append">
+					<input type="text" name="query" id="product" class="form-control " placeholder="Nom du produit">
+					</div>
+		</form>
+		<li class="nav-item"><a class="nav-link js-scroll-trigger" href="{% url "my_account" %}"><i class="fas fa-user fa-3x"></i></a></li>
+		<li class="nav-item"><a class="nav-link js-scroll-trigger" href="{% url "favorite" %}"><i class="fas fa-carrot fa-3x"></i></a></li>
+		<li class="nav-item"><a class="nav-link js-scroll-trigger" href="{% url "logout" %}"><i class="fas fa-sign-out-alt fa-3x"></i></a></li>
+	</ul>
+</div>
+
+
+
+</nav>
+{% endblock nav %}
+{% block header %}
+
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+<header class="masthead text-center text-white d-flex">
+	<div class="container my-auto">
+		<div class="row justify-content-center">
+			<h1><strong>Du gras, oui, mais de qualité !</strong></h1>
+		</div>
+		<div class="col-lg-8 mx-auto">
+			<h2>Trouvez un produit de substitution pour ceux que vous consommez tous les jours.</h2>
+		</div>
+			    			
+		<div class="d-flex justify-content-center">
+			<div class="form-group w-50">
+				<form class="input" method='get' action="{% url "results" %}">
+					<div class="input-group-append">
+					<label for="product"></label>
+						<input type="text" name="query" id="product"class="form-control" >
+						<button class="btn btn-secondary" id="button_design" >Chercher</button>
+					</div>
+				</form>
+				<div class="text-center">
+					<ul class="messages">
+						{% for message in messages %}{{ message }}{% endfor %}
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+ 
+
+</header>
+
+{% endblock header %}
+{% block content%}
+
+ <section class="page-section bg-white" id="about">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6">
+          <div class="row">
+            <div class="col">
+              <p class="text-black col-xs-4"><strong>Colette Tatou: </strong><br/><i>"Nous aimons tous manger, surtout en France ! Personnellement, une baguette fraîche, du bon fromage de chèvre et un bon vin rouge me suffisent amplement. Comme tout le monde, je fais mes courses au supermarché. Mais petit à petit je me suis rendue compte, surtout lorsque nous avons ouvert le restaurant, que je pouvais remplacer les produits aseptisés que j'avais l'habitude d'acheter par de bons produits du terroir Et souvent pour le même prix !"</i></p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col text-center">
+              <img src="{% static '/icons/colette.png' %}" alt="colette" />
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="row">
+            <div class="col">
+              <p class="text-black col-xs-4"><strong>Remy: </strong><br/><i>"Pour ma part je me rendais déjà dans bien des magasins car j'aime beaucoup me balader, surtout dans les caves et les cuisines. Je connaissais par coeur le contenu des boutiques bio (dont je raffole) ainsi que les ingrédients de tous les aliments vendus. Lorsque Colette m'a demandé si elle pouvait remplacer son Nutella matinal par un aliment plus sain, je savais tout de suite où le trouver. L'idée de Pur Beurre était née !"</i></p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col text-center">
+              <img src="{% static 'icons/remy.jpg' %}" alt="ratatouille" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+  </section>
+  
+{% endblock content %}
+{% block footer %}
+
+<section id="contact">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-10 mx-auto text-center">
+				<h2 class="links section-heading">
+					Contactez-nous !
+				</h2>
+				<hr class="my-4">
+				<p class="links mb-5">
+					Soumettez nous vos suggestions
+				</p>
+			</div>
+		</div>
+		<div class="row">
+			<div class="links col-lg-4 ml-auto text-center">
+				<i class="links fa fa-phone fa-3x "></i>
+				<p>
+					01 00 00 00 00
+				</p>
+			</div>
+			<div class="col-lg-4 mr-auto text-center">
+				<i class="links fa fa-envelope fa-3x"></i>
+				<p>
+					<a href="mailto:contact@purbeurre.com" class="links">info@purbeurre.com</a>
+				</p>
+			</div>
+		</div>
+		<div class="row">
+		<div class="col-lg-4 mr-auto text-center">
+		<p>
+			<a href="{% url "mentions_legales" %}" class="links">Mentions legales</a>
+		</p>
+	</div>
+	<div class="col-lg-4 ml-auto text-center">
+		<p>
+			<a href="{% url "home" %}" class="links">Contact</a>
+		</p>
+	</div>
+	</div>
+	</div>
+	
+</section>
+
+
+{% endblock footer %}
+
+</html>
