@@ -38,6 +38,7 @@ urllib3 = "==1.25.9"
 whitenoise = "==5.2.0"
 zipp = "==3.1.0"
 Django = "==3.0.7"
+environ = "*"
 
 [requires]
 python_version = "3.6"
