@@ -23,7 +23,6 @@ def result(request):
         messages.info(request," Produit indisponible")
         return redirect("home")
         
-    
     if not substitutes.exists():
         messages.info(request, "Aucun substituts trouvé pour ce produit")
         

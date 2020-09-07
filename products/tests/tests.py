@@ -28,7 +28,7 @@ class ProductTest(TestCase):
             'image_food': 'https://test',
             'image_nutrition': 'https://test',
         }
-        nutella = Product.objects.create(**nutella)
+        self.nutella = Product.objects.create(**nutella)
 
         nociolatta = {
             'id': '3017620429485',
@@ -40,7 +40,7 @@ class ProductTest(TestCase):
             'image_food': 'https://test',
             'image_nutrition': 'https://test',
         }
-        nociolatta = Product.objects.create(**nociolatta)
+        self.nociolatta = Product.objects.create(**nociolatta)
        
     def test_result(self):
         """test research of product"""
@@ -97,9 +97,13 @@ class ProductTest(TestCase):
 
     def test_favorite_remove(self):
         """test access to favorite page with valid credential"""
-        product = Product.objects.get(id=3017620429484)
+        Substitute.objects.create(
+            customuser=self.customuser,
+            product_original=self.nutella,
+            product_substitute=self.nutella
+            )
         self.client.login(username=self.username, password=self.password)
-        response = self.client.post(f'/remove_products/{product.id}/{product.id}')
+        response = self.client.post(f'/remove_products/{self.nutella.id}/{self.nutella.id}')
         self.assertEqual(response.status_code, 302)
 
 
