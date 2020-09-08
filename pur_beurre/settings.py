@@ -31,9 +31,10 @@ else:
     DEBUG = True
 
 
-ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '127.0.0.1', 'purbeurre75.herokuapp.com']
+ALLOWED_HOSTS = ['0.0.0.0', 'localhost',
+                 '127.0.0.1', 'purbeurre75.herokuapp.com']
 
-#auth
+# auth
 
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'
@@ -49,10 +50,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'products',
     'users.apps.UsersConfig',
-    
-    
+
+
 ]
-AUTH_USER_MODEL  =  'users.CustomUser' 
+AUTH_USER_MODEL = 'users.CustomUser'
 
 
 MIDDLEWARE = [
@@ -64,7 +65,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    
+
 ]
 
 ROOT_URLCONF = 'pur_beurre.urls'
@@ -89,7 +90,6 @@ TEMPLATES = [
 WSGI_APPLICATION = 'pur_beurre.wsgi.application'
 
 
-
 SECRET_KEY = env('SECRET_KEY')
 
 # Database
@@ -102,7 +102,7 @@ DATABASES = {
         'USER': env('DATABASE_USER'),
         'PASSWORD': env('DATABASE_PASSWORD'),
         'HOST': env('DATABASE_HOST'),
-        
+
     }
 }
 

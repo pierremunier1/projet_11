@@ -18,25 +18,25 @@ class Category(models.Model):
         return self.category_name
 
 
-class ProductManager(models.Manager): 
+class ProductManager(models.Manager):
     """manager find product substitutes"""
 
     def search_sub(self, product_name):
         """check if substitutes exists in database"""
-            
+
         product = Product.objects.filter(
             Q(product_name__icontains=product_name) |
             Q(brands__icontains=product_name
-            ))[:1].get()
-        
+              ))[:1].get()
+
         substitutes = Product.objects.filter(
-                category=product.category,
-                nutriscore_fr__lt=product.nutriscore_fr
-                ).order_by("nutriscore_fr")[:9]
- 
-        return product,substitutes
-    
-    def get_detail(self,product_id):
+            category=product.category,
+            nutriscore_fr__lt=product.nutriscore_fr
+        ).order_by("nutriscore_fr")[:9]
+
+        return product, substitutes
+
+    def get_detail(self, product_id):
         """get detail of product"""
 
         try:
@@ -44,11 +44,11 @@ class ProductManager(models.Manager):
 
         except Product.DoesNotExist:
             product = None
-        
+
         finally:
             return product
 
-    def add_substitute(self,product_original_id,product_substitute_id,user):
+    def add_substitute(self, product_original_id, product_substitute_id, user):
         """save substitute in favoris"""
 
         Substitute.objects.update_or_create(
@@ -56,7 +56,7 @@ class ProductManager(models.Manager):
             product_original_id=product_original_id,
             customuser=user
         )
-            
+
 
 class Product(models.Model):
     """product model"""
@@ -72,7 +72,7 @@ class Product(models.Model):
     image_nutrition = models.CharField(max_length=250)
     image_food = models.CharField(max_length=250)
     date = models.DateTimeField(auto_now_add=True)
-    objects=ProductManager()
+    objects = ProductManager()
 
     class Meta:
         ordering = ['product_name']
@@ -80,19 +80,18 @@ class Product(models.Model):
     def __str__(self):
         return self.product_name
 
+
 class Substitute(models.Model):
     """substitute model"""
 
-    customuser = models.ForeignKey('users.CustomUser', on_delete=models.CASCADE)
+    customuser = models.ForeignKey(
+        'users.CustomUser', on_delete=models.CASCADE)
     product_original = models.ForeignKey(Product,
-        on_delete=models.CASCADE,related_name='product_original')
+                                         on_delete=models.CASCADE, related_name='product_original')
     product_substitute = models.ForeignKey(Product,
-        on_delete=models.CASCADE,related_name='product_substitute')
-    objects=ProductManager()
-    
+                                           on_delete=models.CASCADE, related_name='product_substitute')
+    objects = ProductManager()
+
     def __str__(self):
 
         return str(self.product_substitute)
-
-
-

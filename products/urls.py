@@ -11,5 +11,4 @@ urlpatterns = [
     path('remove_products/<int:product_original_id>/<int:product_substitute_id>',views.remove_products,name='remove_products'),
     path('mentions_legales', views.mentions_legales, name='mentions_legales'),
     path('my_account',views.my_account, name='my_account'),
-
 ]
