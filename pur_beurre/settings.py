@@ -25,7 +25,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 
-if env('ENV') == 'PRODUCTION':
+if os.environ.get('ENV') == 'PRODUCTION':
     DEBUG = False
 else:
     DEBUG = True
@@ -146,7 +146,7 @@ STATIC_URL = '/static/'
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
-if env('ENV') == 'PRODUCTION':
+if os.environ.get('ENV') == 'PRODUCTION':
 
     BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
