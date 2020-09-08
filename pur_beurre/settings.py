@@ -146,7 +146,7 @@ STATIC_URL = '/static/'
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
-if os.environ.get('ENV') == 'PRODUCTION':
+if os.environ.get('ENV') == 'production':
 
     BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
