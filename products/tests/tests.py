@@ -6,6 +6,8 @@ from users.models import CustomUser
 
 class ProductTest(TestCase):
 
+    """Products test class"""
+
     def setUp(self):
         """initializing tests variables"""
 
@@ -43,13 +45,13 @@ class ProductTest(TestCase):
         self.nociolatta = Product.objects.create(**nociolatta)
 
     def test_result(self):
-        """test research of product"""
+        """test research of product, if correct expected 200 status code"""
 
         response = self.client.get(reverse('results'), {'query': 'Nutella'})
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'results.html')
 
-    def test_result_invalid_404(self):
+    def test_result_invalid(self):
         """test invalid search expected 302 code"""
 
         response = self.client.get(reverse('results'), {'query': '?bkxkbx?'})

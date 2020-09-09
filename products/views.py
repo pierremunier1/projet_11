@@ -7,23 +7,25 @@ from products.models import Product, Category, Substitute
 
 
 def search(request):
+    """showing the home page"""
 
     return render(request, "home.html")
 
 
 def result(request):
-    """show result"""
+    """show result page"""
 
     query = request.GET.get('query')
 
     try:
         product, substitutes = Product.objects.search_sub(query)
     except Product.DoesNotExist:
-        messages.info(request, " Produit indisponible")
+        messages.info(request, "Produit indisponible")
         return redirect("home")
 
     if not substitutes.exists():
-        messages.info(request, "Aucun substituts trouvé pour ce produit")
+        messages.info(request, "Substituts indisponible")
+        return redirect("home")
 
     return render(
         request,
