@@ -2,7 +2,7 @@
 
 Program developed by Pierre Munier, September2020.
 
-## What the project is for ?
+# What the project is for ?
 
     Pur Beurre website allows you to find a substitute healthy food to your junk food !
     Food quality is based on the nutriscore, with all the data from the Open Food Facts open source database.
