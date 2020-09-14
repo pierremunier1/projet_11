@@ -1,6 +1,11 @@
-# projet_huit pur beurre
+# projet_onze pur beurre
 
 Program developed by Pierre Munier, September2020.
+
+## Update of September 2020
+
+- Autocomplete field in the home page
+- Reset password by email
 
 ## What the project is for ?
 
