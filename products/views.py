@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse, HttpResponseNotFound, Http404
+from django.http import HttpResponse, HttpResponseNotFound, Http404, JsonResponse
 from users.models import CustomUser
 from products.models import Product, Category, Substitute
 
@@ -141,3 +141,20 @@ def my_account(request):
     """account information."""
     user = CustomUser.objects.get(id=request.user.id)
     return render(request, 'my_account.html', {'account': user})
+
+def search_autocomplete(request):
+    "autocomplete research in database"
+    if 'term' in request.GET:
+        qs = (
+            Product.objects.filter(
+                product_name__icontains=request.GET.get('term')
+                )[:5] or  
+            Product.objects.filter(
+                brands__icontains=request.GET.get('term')
+                )[:5]
+            )
+        products = list()
+        for product in qs:
+            products.append(product.product_name)
+        return JsonResponse(products, safe=False)
+    return render(request, 'home.html')

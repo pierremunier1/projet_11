@@ -44,20 +44,20 @@ class ProductTest(TestCase):
         }
         self.nociolatta = Product.objects.create(**nociolatta)
 
-    def test_result(self):
+    def test_research(self):
         """test research of product, if correct expected 200 status code"""
 
         response = self.client.get(reverse('results'), {'query': 'Nutella'})
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'results.html')
 
-    def test_result_invalid(self):
+    def test_research_invalid(self):
         """test invalid search expected 302 code"""
 
         response = self.client.get(reverse('results'), {'query': '?bkxkbx?'})
         self.assertEqual(response.status_code, 302)
 
-    def test_detail(self):
+    def test_get_detail_of_product(self):
         """test to access detail page of product"""
 
         product = Product.objects.get(id=3017620429484)
@@ -94,7 +94,7 @@ class ProductTest(TestCase):
         })
         self.assertEqual(response.status_code, 302)
 
-    def test_favorite_remove(self):
+    def test_favorite_remove_product(self):
         """test access to favorite page with valid credential"""
         Substitute.objects.create(
             customuser=self.customuser,
@@ -112,19 +112,19 @@ class ProductTest(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'mentions_legales.html')
 
-    def test_access_my_account(self):
+    def test_access_my_account_without_redirection(self):
         """without redirection"""
 
         response = self.client.get('/my_account')
         self.assertEqual(response.status_code, 302)
 
-    def test_access_my_account_1(self):
+    def test_access_my_account_with_redirection(self):
         """with redirection"""
 
         response = self.client.get('/users/login/?next=/my_account')
         self.assertEqual(response.status_code, 200)
 
-    def test_access_my_account_2(self):
+    def test_access_my_account_login(self):
         """with redirection"""
 
         login = self.client.login(
