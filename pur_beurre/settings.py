@@ -13,18 +13,10 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 import os
 import dj_database_url
 import environ
-<<<<<<< HEAD
 from pathlib import Path
-
-
-=======
->>>>>>> 83291be23de4ee3ca6cf180de73b752c7840ca55
 
 env = environ.Env()
 environ.Env.read_env()
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
 
 # Quick-start development settings - unsuitable for prodNuction
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
