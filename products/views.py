@@ -143,12 +143,8 @@ def my_account(request):
     return render(request, 'my_account.html', {'account': user})
 
 def search_autocomplete(request):
-<<<<<<< HEAD
     """autocomplete research in database"""
     products = list()
-=======
-    "autocomplete research in database"
->>>>>>> 83291be23de4ee3ca6cf180de73b752c7840ca55
     if 'term' in request.GET:
         qs = (
             Product.objects.filter(
@@ -158,16 +154,8 @@ def search_autocomplete(request):
                 brands__icontains=request.GET.get('term')
                 )[:5]
             )
-<<<<<<< HEAD
     
         for product in qs:
             products.append(product.product_name)
     return JsonResponse(products, safe=False)
     
-=======
-        products = list()
-        for product in qs:
-            products.append(product.product_name)
-        return JsonResponse(products, safe=False)
-    return render(request, 'home.html')
->>>>>>> 83291be23de4ee3ca6cf180de73b752c7840ca55

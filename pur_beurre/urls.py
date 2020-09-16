@@ -25,9 +25,6 @@ urlpatterns = [
     path('users/', include('users.urls')),
     path('users/', include('django.contrib.auth.urls')),
     path('', TemplateView.as_view(template_name='home.html'), name='home'),
-<<<<<<< HEAD
     
-=======
->>>>>>> 83291be23de4ee3ca6cf180de73b752c7840ca55
 ]
 
