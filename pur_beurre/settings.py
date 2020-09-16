@@ -13,9 +13,12 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 import os
 import dj_database_url
 import environ
+<<<<<<< HEAD
 from pathlib import Path
 
 
+=======
+>>>>>>> 83291be23de4ee3ca6cf180de73b752c7840ca55
 
 env = environ.Env()
 environ.Env.read_env()
@@ -61,6 +64,10 @@ AUTH_USER_MODEL = 'users.CustomUser'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+<<<<<<< HEAD
+=======
+    #'whitenoise.middleware.WhiteNoiseMiddleware',
+>>>>>>> 83291be23de4ee3ca6cf180de73b752c7840ca55
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -145,9 +152,12 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+<<<<<<< HEAD
 EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
 EMAIL_FILE_PATH = os.path.join(BASE_DIR,'sent_emails')
 
+=======
+>>>>>>> 83291be23de4ee3ca6cf180de73b752c7840ca55
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
