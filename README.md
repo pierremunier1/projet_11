@@ -1,9 +1,4 @@
-<<<<<<< HEAD
-# projet_huit pur beurre
 
-Program developed by Pierre Munier, September2020.
-
-=======
 # projet_onze pur beurre
 
 Program developed by Pierre Munier, September2020.
@@ -13,7 +8,6 @@ Program developed by Pierre Munier, September2020.
 - Autocomplete field in the home page
 - Reset password by email
 
->>>>>>> 83291be23de4ee3ca6cf180de73b752c7840ca55
 ## What the project is for ?
 
     Pur Beurre website allows you to find a substitute healthy food to your junk food !
