@@ -26,3 +26,17 @@
             'password': self.password
         })
         self.assertEqual(response.status_code, 200)
+
+         self.driver.find_element_by_css_selector('#button-login').click()
+        self.driver.find_element_by_css_selector('#id_username').send_keys(
+            "jeanpierre"
+        )
+        self.driver.find_element_by_css_selector('#id_password').send_keys(
+            "password24!"
+        )
+        self.driver.find_element_by_css_selector('#button-submit').click()
+        logout = self.driver.find_element_by_css_selector('#button-logout')
+        self.assertEqual(
+            logout.text,
+            "Deconnexion",
+            "Disconnect button should be available.",

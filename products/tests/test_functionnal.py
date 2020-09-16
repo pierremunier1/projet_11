@@ -6,7 +6,6 @@ firefox_options = webdriver.FirefoxOptions()
 firefox_options.headless = True
 
 
-
 class FirefoxFunctionalTestCases(StaticLiveServerTestCase):
     """Functional tests using the Firefox web browser in headless mode."""
 
@@ -29,8 +28,9 @@ class FirefoxFunctionalTestCases(StaticLiveServerTestCase):
         )
 
     def test_user_can_connect_and_disconnect(self):
+
         self.driver.get(self.live_server_url)
-        self.driver.find_element_by_css_selector('#button-login').click()
+        self.driver.find_element_by_css_selector('#login').click()
         self.driver.find_element_by_css_selector('#id_username').send_keys(
             "jeanpierre"
         )
@@ -38,9 +38,6 @@ class FirefoxFunctionalTestCases(StaticLiveServerTestCase):
             "password24!"
         )
         self.driver.find_element_by_css_selector('#button-submit').click()
-        logout = self.driver.find_element_by_css_selector('#button-logout')
-        self.assertEqual(
-            logout.text,
-            "Deconnexion",
-            "Disconnect button should be available.",
-        )
+        logout = self.driver.find_element_by_css_selector('#logout')
+
+        self.assertTemplateUsed('home.html')
