@@ -38,10 +38,13 @@
         <form method="post">
           {% csrf_token %}
           {{ form.as_p }}
-          <button type="submit" id="button-submit">Login</button>
+          <button type="submit">Login</button>
         </form>
       <div>
   </div>
+<script>
+'csrfmiddlewaretoken': $('csrfmiddlewaretoken').val()};
+</script>
 
 </header>
 
