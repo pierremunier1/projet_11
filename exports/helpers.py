@@ -1,6 +1,7 @@
 from django.apps import apps as django_apps
 from django.conf import settings
 
+
 class Exporter:
     """Object responsible of exporting fields from a given model."""
 
