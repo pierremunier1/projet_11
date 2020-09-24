@@ -135,7 +135,6 @@ def mentions_legales(request):
 
     return render(request, 'mentions_legales.html')
 
-
 @login_required(login_url='/users/login/?next=/my_account/', redirect_field_name='next')
 def my_account(request):
     """account information."""
@@ -154,7 +153,6 @@ def search_autocomplete(request):
                 brands__icontains=request.GET.get('term')
                 )[:5]
             )
-    
         for product in qs:
             products.append(product.product_name)
     return JsonResponse(products, safe=False)

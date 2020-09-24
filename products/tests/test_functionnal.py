@@ -35,9 +35,8 @@ class FirefoxFunctionalTestCases(StaticLiveServerTestCase):
             "jeanpierre"
         )
         self.driver.find_element_by_css_selector('#id_password').send_keys(
-            "password24!"
+            "password54!"
         )
         self.driver.find_element_by_css_selector('#button-submit').click()
-        logout = self.driver.find_element_by_css_selector('#logout')
 
         self.assertTemplateUsed('home.html')

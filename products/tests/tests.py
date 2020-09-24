@@ -1,5 +1,6 @@
 from django.test import TestCase, Client
 from django.urls import reverse
+from django.core import mail
 from products.models import Category, Product, Substitute
 from users.models import CustomUser
 
@@ -135,3 +136,61 @@ class ProductTest(TestCase):
         })
         self.assertEqual(response.status_code, 302)
         self.assertTrue(login)
+
+
+    def test_autocomplete(self):
+        """test research of product by autocomplete"""
+
+        response = self.client.get('/search_autocomplete/?term=nute')
+        self.assertEqual(response.status_code,200)
+        self.assertJSONEqual(response.content,['Nutella'])
+
+    def test_reset_password(self):
+        """test function to reset password"""
+
+        response = self.client.get('/users/password_reset/')
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'registration/password_reset.html')
+    
+    def test_reset_password_1(self):
+        """test function to reset password"""
+
+        self.client.login(email=self.email)
+        response = self.client.post(('/users/password_reset/'), {
+            'email': self.email
+        })
+        self.assertEqual(response.status_code, 302)
+        self.assertTemplateUsed(response, 'registration/password_reset_email.html')
+    
+    def test_reset_password_2(self):
+        """test function to reset password"""
+
+        response = self.client.get('/users/password_reset/done/')
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'password_reset_done.html')
+
+    
+    def test_reset_password_3(self):
+        """test function to reset password"""
+        
+        response = self.client.get("/users/reset/MTQ/set-password/")
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'password_reset_confirm.html')
+
+    def test_reset_password_4(self):
+        """test function to confirm change password"""
+
+        response = self.client.post(("/users/password_reset/"),{'email':self.email})
+        self.assertEqual(response.status_code, 302)
+        # At this point the system will "send" us an email:
+        self.assertEqual(len(mail.outbox), 1)
+        self.assertEqual(mail.outbox[0].subject, 'Password reset on testserver')
+        # Now we can use the token:
+        token = response.context[0]['token']
+        uid = response.context[0]['uid']
+        response = self.client.get(reverse('password_reset_confirm', kwargs={'token':token,'uidb64':uid}))
+        self.assertEqual(response.status_code, 302)
+        # Now we post to the same url with our new password:
+        response = self.client.post(reverse('password_reset_confirm', 
+        kwargs={'uidb64':uid,'token':token}),{'new_password1':'password32!','new_password2':'password32!'})
+
