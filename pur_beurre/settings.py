@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'products',
     'users.apps.UsersConfig',
+    'exports.apps.ExportsConfig',
 
 
 ]
@@ -171,3 +172,12 @@ if os.environ.get('ENV') == 'production':
     #STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
     db_from_env = dj_database_url.config(conn_max_age=500)
+
+# Configuration of the exports application
+EXPORTS_MODEL = "products.Substitute"
+EXPORTS_FIELDS = [
+    'product_original__id', 
+    'product_original__product_name',
+    'product_substitute__id', 
+    'product_substitute__product_name'
+]
