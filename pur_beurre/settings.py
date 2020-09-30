@@ -181,3 +181,5 @@ EXPORTS_FIELDS = [
     'product_substitute__id', 
     'product_substitute__product_name'
 ]
+
+EXPORTS_ORDER = ['product_original__product_name']

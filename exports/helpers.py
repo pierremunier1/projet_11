@@ -1,5 +1,6 @@
 from django.apps import apps as django_apps
 from django.conf import settings
+from django.core.exceptions import ImproperlyConfigured
 
 
 class Exporter:
@@ -12,11 +13,11 @@ class Exporter:
             raise ImproperlyConfigured(
                 "EXPORTS_FIELDS must be a list of strings."
             )
-        self._order = getattr(settings, "EXPORTS_ORDER", ['?'])
+        self._order = fields or getattr(settings, "EXPORTS_ORDER")
         if not isinstance(self._order, list):
-            raise ImproperlyConfigured()
-                "EXPORTS_ORDER must be a list of strings."
-            )
+            raise ImproperlyConfigured(
+        "EXPORTS_ORDER must be a list of strings."
+        )
 
     @property
     def raw_data(self):
@@ -67,4 +68,5 @@ class Exporter:
     @property
     def data(self):
         """The data to export."""
+    
         return self._build_exports(self.raw_data)
