@@ -1,3 +1,2 @@
 language: python
-cache: pip
-script: python manage.py test
+script: python manage.py test products
