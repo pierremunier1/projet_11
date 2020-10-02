@@ -176,10 +176,8 @@ if os.environ.get('ENV') == 'production':
 # Configuration of the exports application
 EXPORTS_MODEL = "products.Substitute"
 EXPORTS_FIELDS = [
+    'product_substitute__id', 
+    'product_substitute__product_name',
     'product_original__id', 
     'product_original__product_name',
-    'product_substitute__id', 
-    'product_substitute__product_name'
 ]
-
-EXPORTS_ORDER = ['product_original__product_name']

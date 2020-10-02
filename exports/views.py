@@ -1,4 +1,4 @@
-from django.http import JsonResponse
+from django.http import HttpResponse, JsonResponse
 from django.contrib.auth.decorators import login_required
 
 from .helpers import Exporter
@@ -8,6 +8,8 @@ from .helpers import Exporter
 def export(request):
     """Exports instances as a json file."""
     exporter = Exporter()
-    
-   
-    return JsonResponse(exporter.data, safe=False)
+    data = exporter.data
+    print(data)
+    response = HttpResponse(data, content_type='application/json')
+    response['Content-Disposition'] = 'attachment; filename="export.json"'
+    return response

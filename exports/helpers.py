@@ -13,7 +13,7 @@ class Exporter:
             raise ImproperlyConfigured(
                 "EXPORTS_FIELDS must be a list of strings."
             )
-        self._order = fields or getattr(settings, "EXPORTS_ORDER")
+        self._order = fields or getattr(settings, "EXPORTS_ORDER",['?'])
         if not isinstance(self._order, list):
             raise ImproperlyConfigured(
         "EXPORTS_ORDER must be a list of strings."
@@ -39,7 +39,7 @@ class Exporter:
     def _build_exports(self, data):
         """Build exported data structure from raw data from database."""
         exports = []
-        for element in data:
+        for element in (data):
             export = {}
             for key, value in element.items():
                 parts = key.split("__")
@@ -48,6 +48,7 @@ class Exporter:
                     value = {part: value}
                 export = self._merge(export, value)
             exports.append(export)
+            print(exports)
         return exports
 
     def _get_model(self, constant_name):
@@ -70,3 +71,4 @@ class Exporter:
         """The data to export."""
     
         return self._build_exports(self.raw_data)
+     
