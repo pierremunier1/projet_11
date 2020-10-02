@@ -34,7 +34,8 @@ class ExportTest(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.__getitem__('content-type'), 'application/json')
 
-    def test_build_export(self):
+    def build_export(self):
+        """test build export"""
         
         exporter = Exporter()
         result = [{'product_original': {'product_name': "100% pur jus d'Oranges BIO pressées", 'id': 3045320104738}, 'product_substitute': {'product_name': 'Pur jus citron vert', 'id': 3478820088879}}]
