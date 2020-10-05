@@ -9,7 +9,6 @@ def export(request):
     """Exports instances as a json file."""
     exporter = Exporter()
     data = exporter.data
-    print(data)
     response = HttpResponse(data, content_type='application/json')
     response['Content-Disposition'] = 'attachment; filename="export.json"'
     return response
