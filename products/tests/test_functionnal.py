@@ -30,6 +30,7 @@ class FirefoxFunctionalTestCases(StaticLiveServerTestCase):
         )
 
     def test_user_can_connect_and_disconnect(self):
+        """test login user"""
 
         self.driver.get(self.live_server_url)
         self.driver.find_element_by_css_selector('#login').click()
@@ -44,6 +45,7 @@ class FirefoxFunctionalTestCases(StaticLiveServerTestCase):
         self.assertTemplateUsed('home.html')
 
     def test_reset_password(self):
+        """test reset password"""
 
         self.driver.get(self.live_server_url)
         self.driver.find_element_by_css_selector('#login').click()
@@ -61,7 +63,7 @@ class FirefoxFunctionalTestCases(StaticLiveServerTestCase):
         self.assertTemplateUsed('password_reset_done.html')
 
     def test_export(self):
-
+        """test file export"""
         self.driver.get(self.live_server_url)
         self.driver.find_element_by_css_selector('#login').click()
         self.driver.find_element_by_css_selector('#id_username').send_keys(
@@ -74,6 +76,7 @@ class FirefoxFunctionalTestCases(StaticLiveServerTestCase):
         self.driver.find_element_by_css_selector('#export').click()
 
     def test_autocomplete(self):
+        """test autocomplete"""
 
         self.driver.get(self.live_server_url)
         self.driver.find_element_by_css_selector('#product').send_keys(
