@@ -3,6 +3,8 @@ from django.urls import reverse
 from django.core import mail
 from products.models import Category, Product, Substitute
 from users.models import CustomUser
+import json
+from exports.helpers import Exporter
 
 
 class ProductTest(TestCase):
@@ -194,3 +196,29 @@ class ProductTest(TestCase):
         response = self.client.post(reverse('password_reset_confirm', 
         kwargs={'uidb64':uid,'token':token}),{'new_password1':'password32!','new_password2':'password32!'})
 
+    def test_export_view(self):
+        """test export view"""
+
+        login = self.client.login(
+            username=self.username, password=self.password)
+        response = self.client.get('/exports') 
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response['content-type'], 'application/json')
+        self.assertEqual(response['content-disposition'], 'attachment; filename="export.json"')
+
+    def test_build_export(self):
+        """test build export"""
+        Substitute.objects.create(
+            customuser=self.customuser,
+            product_original=self.nutella,
+            product_substitute=self.nutella
+        )
+        self.client.login(username=self.username, password=self.password)
+        product = Product.objects.get(id=3017620429484)
+        substitute = Product.objects.get(id=3017620429484)
+        response = self.client.post(f'/{product.id}/{substitute.id}')
+        result = [{'product_original': {'product_name': 'Nutella', 'id': 3017620429484}, 'product_substitute': {'product_name': 'Nutella', 'id': 3017620429484}}]
+        exporter = Exporter()
+        data = exporter.data
+        self.assertEqual(response.status_code,302 )
+        self.assertEqual(result,data)

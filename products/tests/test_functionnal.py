@@ -40,3 +40,37 @@ class FirefoxFunctionalTestCases(StaticLiveServerTestCase):
         self.driver.find_element_by_css_selector('#button-submit').click()
 
         self.assertTemplateUsed('home.html')
+
+    def test_reset_password(self):
+
+        self.driver.get(self.live_server_url)
+        self.driver.find_element_by_css_selector('#login').click()
+        self.driver.find_element_by_css_selector('#id_username').send_keys(
+            "jeanpierre"
+        )
+        self.driver.find_element_by_css_selector('#id_password').send_keys(
+            "password24!"
+        )
+        self.driver.find_element_by_css_selector('#button-submit').click()
+        self.driver.find_element_by_css_selector('#reset').click()
+        self.driver.find_element_by_css_selector('#id_email').send_keys(
+            "jeanpierre@gmail.com"
+        )
+        self.assertTemplateUsed('password_reset_done.html')
+
+    def test_export(self):
+
+        self.driver.get(self.live_server_url)
+        self.driver.find_element_by_css_selector('#login').click()
+        self.driver.find_element_by_css_selector('#id_username').send_keys(
+            "jeanpierre"
+        )
+        self.driver.find_element_by_css_selector('#id_password').send_keys(
+            "password24!"
+        )
+        self.driver.find_element_by_css_selector('#button-submit').click()
+        self.driver.find_element_by_css_selector('#export').click()
+
+    def test_autocomplete(self):
+
+        self.driver.get(self.live_server_url)
