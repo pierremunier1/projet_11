@@ -1,6 +1,8 @@
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from django.contrib.auth import get_user_model
 from selenium import webdriver
+from selenium.webdriver import ActionChains
+from selenium.webdriver.common.keys import Keys
 
 firefox_options = webdriver.FirefoxOptions()
 firefox_options.headless = True
@@ -74,3 +76,10 @@ class FirefoxFunctionalTestCases(StaticLiveServerTestCase):
     def test_autocomplete(self):
 
         self.driver.get(self.live_server_url)
+        self.driver.find_element_by_css_selector('#product').send_keys(
+            "nute"
+        )
+        self.driver.find_element_by_css_selector('#product').send_keys(Keys.ARROW_DOWN)
+        self.driver.find_element_by_css_selector('#product').click()
+        self.driver.find_element_by_css_selector('#button_design').click()
+        self.assertTemplateUsed('result.html')
