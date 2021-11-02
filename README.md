@@ -1,5 +1,4 @@
 
-# projet_onze pur beurre
 
 Program developed by Pierre Munier, September2020.
 
